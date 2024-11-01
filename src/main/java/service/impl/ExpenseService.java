@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -72,26 +74,50 @@ public class ExpenseService implements IExpenseService {
 
   @Override
   public void updateDescription(String id, String description) {
-
+    Optional<Expense> expense = expenses.stream()
+        .filter(e -> e.getId() == Integer.parseInt(id)).findFirst();
+    if (expense.isPresent()) {
+      Expense updatedExpense = expense.get();
+      updatedExpense.setDescription(description);
+      saveExpenses();
+    } else {
+      System.out.println("El id " + id + " no pertenece a ningun expense");
+    }
   }
 
   @Override
   public void updateAmount(String id, String amount) {
-
+    Optional<Expense> expense = expenses.stream()
+        .filter(e -> e.getId() == Integer.parseInt(id)).findFirst();
+    if (expense.isPresent()) {
+      Expense updatedExpense = expense.get();
+      updatedExpense.setAmount(Double.parseDouble(amount));
+      saveExpenses();
+    } else {
+      System.out.println("El id " + id + " no pertenece a ningun expense");
+    }
   }
 
   @Override
   public void deleteExpense(String id) {
-
+    expenses.removeIf(e -> e.getId() == Integer.parseInt(id));
+    saveExpenses();
   }
 
   @Override
   public Double summary() {
-    return 0.0;
+    return expenses.stream()
+        .mapToDouble(Expense::getAmount)
+        .reduce(0, Double::sum);
   }
 
   @Override
   public Double summaryByMonth(String month) {
-    return 0.0;
+    return expenses.stream()
+        .filter(e -> e.getCreatedAt().isEqual(LocalDate.of(e.getCreatedAt().getYear(),
+            Month.of(Integer.parseInt(month)),
+            e.getCreatedAt().getDayOfMonth())))
+        .mapToDouble(Expense::getAmount)
+        .reduce(0, Double::sum);
   }
 }
