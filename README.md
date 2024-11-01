@@ -24,13 +24,13 @@ Clona este repositorio:
 
 Lista de comandos disponibles:
 
-| Comando                                               | Descripcion                           |
-|-------------------------------------------------------|---------------------------------------|
-| add --description "<descripcion>" --amount <cantidad> | Agrega expense descripcion y cantidad |
-| list                                                  | Lista todas los datos                 |
-| summary --month <valor>                               | sumatoria de amount por mes           |
-| summary --all                                         | sumatoria total de amount             |
-| delete --id <valor>                                   | borra expense por id                  |
-| update --id <valor> --description "<string>"          | Actualiza descripcion de la expense   |
-| update --id <valor> --amount <valor>                  | Actualiza el amount                   |
-| exit                                                  | salir del programa                    |
+| Comando                                           | Descripcion                           |
+|---------------------------------------------------|---------------------------------------|
+| add --description "descripcion" --amount cantidad | Agrega expense descripcion y cantidad |
+| list                                              | Lista todas los datos                 |
+| summary --month valor                             | sumatoria de amount por mes           |
+| summary --all                                     | sumatoria total de amount             |
+| delete --id valor                                 | borra expense por id                  |
+| update --id valor --description "descripcion"     | Actualiza descripcion de la expense   |
+| update --id valor --amount valor                  | Actualiza el amount                   |
+| exit                                              | salir del programa                    |
